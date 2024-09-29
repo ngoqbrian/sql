@@ -15,7 +15,38 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 
 Bonus: Are there privacy implications to this, why or why not?
 ```
-Your answer...
+
+Type 1 Slowly Changing Dimension in this case would mean that the customer addresses changes are OVERWRITTEN. 
+
+The design for Type 1 would be such that:
+
+CustomerID -- PK
+Address
+City
+Province
+Postal Code
+Country
+Last Updated
+
+
+Type 2 Slowly Changing Dimension in this architecture would RETAIN changes as new rows. All address changes for each customer would be retained.
+
+The design for Type 2 architecture:
+CustomerAddressID -- PK
+CustomerID
+Address
+City
+Province
+Postal Code
+Country
+StartDate
+EndDate
+IsCurrent
+
+Notice how in Type 2 that the CustomerAddressID is the Primary Key and that each address would be unique. This way when a customer's address changes, a new row would be added to the table while preserving the old address.
+
+There could be potential privacy implications for Type 2 due to retaining historical customer addresses that may not be neccessarily anymore, but it would still contain sensitive informaiton. 
+
 ```
 
 ## Question 4
@@ -23,7 +54,18 @@ Review the AdventureWorks Schema [here](https://imgur.com/a/u0m8fX6)
 
 Highlight at least two differences between it and your ERD. Would you change anything in yours?
 ```
-Your answer...
+There are several differences that I noticed in the AdventureWorks Schema and my ERD. 
+
+-AdventureWorks has schema separations (colour coded too!); for example Sales, Person, Purchasing, Human Resources are all clearly defined and divded by context
+    -each of these schemas has its own table and foreign key relationship
+
+-AdventureWorks separates data into smaller tables which could reduce redundancy. For example, "Product" data is broken into multiple related tables (Product, ProductCategory, ProductSubCategory)
+
+-AdventureWorks contains "ModifiedDate" in many of its tables. This could be useful for tracking changes and auditing data.
+
+I would definitely consider adding separate schemas for each domain of the bookstore, especially as it grows larger. It would make the data more manageable and clear. I would also think of a way to incorporate metadata tracking in my ERD, perhaps for updates in customer addresses or entering in book entity details.
+
+
 ```
 
 # Criteria
