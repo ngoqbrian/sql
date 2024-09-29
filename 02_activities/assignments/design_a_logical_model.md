@@ -56,9 +56,14 @@ Highlight at least two differences between it and your ERD. Would you change any
 ```
 There are several differences that I noticed in the AdventureWorks Schema and my ERD. 
 
--AdventureWorks has schema separations; for example Sales, Person, Purchasing, Human Resources are all clearly defined and divded by context
+-AdventureWorks has schema separations (colour coded too!); for example Sales, Person, Purchasing, Human Resources are all clearly defined and divded by context
     -each of these schemas has its own table and foreign key relationship
 
+-AdventureWorks separates data into smaller tables which could reduce redundancy. For example, "Product" data is broken into multiple related tables (Product, ProductCategory, ProductSubCategory)
+
+-AdventureWorks contains "ModifiedDate" in many of its tables. This could be useful for tracking changes and auditing data.
+
+I would definitely consider adding separate schemas for each domain of the bookstore, especially as it grows larger. It would make the data more manageable and clear. I would also think of a way to incorporate metadata tracking in my ERD, perhaps for updates in customer addresses or entering in book entity details.
 
 
 ```
